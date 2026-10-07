@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reader_tracker/pages/books_details.dart';
 import 'package:reader_tracker/pages/favorite_screen.dart';
 import 'package:reader_tracker/pages/home_screen.dart';
 import 'package:reader_tracker/pages/saved_screen.dart';
@@ -22,7 +23,15 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
         useMaterial3: true
       ),
-      home: MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/home': (context) => HomeScreen(),
+        '/save': (context) => SavedScreen(),
+        '/favorites': (context) => FavoriteScreen(),
+        '/details': (context) => BooksDetailsScreen(),
+
+      },
+      home: const MyHomePage(),
     );
   }
 }
@@ -49,23 +58,23 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('A.Reader'),
+        title: const Text('A.Reader'),
       ),
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         currentIndex: _currentIndex,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+          const BottomNavigationBarItem(
+            icon: const Icon(Icons.home),
             label: 'Home'
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.save),
+          const BottomNavigationBarItem(
+            icon: const Icon(Icons.save),
             label: 'Saved'
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
+          const BottomNavigationBarItem(
+            icon: const Icon(Icons.favorite),
             label: 'Favorite'
           ),
         ],
