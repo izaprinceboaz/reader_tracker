@@ -3,6 +3,9 @@ import 'package:reader_tracker/pages/favorite_screen.dart';
 import 'package:reader_tracker/pages/home_screen.dart';
 import 'package:reader_tracker/pages/saved_screen.dart';
 
+import 'models/book.dart';
+import 'network/network.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -34,11 +37,28 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
 
+  Network network = Network();
+
+  Future<void> _searchBooks(String query) async {
+    try {
+      List<Book> books = await network.searchBooks(query);
+      print('Books: ${books.toString()}');
+    } catch (e) {
+      // TODO
+    }
+  }
+
   final List<Widget> _screens = [
     const HomeScreen(),
     const SavedScreen(),
     const FavoriteScreen()
   ];
+
+  @override
+  void initState() {
+    _searchBooks('Androids');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
